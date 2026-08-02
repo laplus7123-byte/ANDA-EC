@@ -1,0 +1,22 @@
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+!.env.example
+
+# Local preview / editor
+.vscode/
+.idea/
+*.swp
+
+# Generated / temp
+design/_shot-*.png
+design/assets/images/_sized/
+
+# Scraped reference site (local only)
+参考サイト/
+
+# Theme zip is generated locally for WP admin upload (too large to commit)
+*.zip
+anda-theme.zip

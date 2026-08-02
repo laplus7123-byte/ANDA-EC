@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>カテゴリー一覧｜ANDA</title>
+  <link rel="stylesheet" href="assets/css/reference-base.css">
+  <link rel="stylesheet" href="assets/css/anda-theme.css">
+</head>
+<body class="is-show">
+  <div id="pagetop">
+    <div data-site-chrome></div>
+    <div class="siteBody siteBody--inner">
+      <main class="pageShell">
+        <nav class="breadcrumb"><a href="index.html">トップ</a><span>/</span><span>カテゴリー一覧</span></nav>
+        <h1 class="pageShell_title">カテゴリー一覧</h1>
+        <p class="pageShell_lead">大枠のカテゴリーから商品を探せます。</p>
+        <div class="category-index" id="categoryIndex"></div>
+        <p style="margin-top:24px"><a href="catalog.html?cat=all" class="btnRound">すべての商品を見る</a></p>
+      </main>
+
+      <div data-site-footer></div>
+    </div>
+  </div>
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/site-ui.js"></script>
+  <script>
+    document.getElementById("categoryIndex").innerHTML = ANDA.categories.map((c) => {
+      const count = ANDA.getProductsByCategory(c.id).length;
+      return `<a href="catalog.html?cat=${c.id}" class="category-index-card">
+        <img src="${c.image}" alt="" loading="lazy">
+        <div><h2>${c.name}</h2><p>${c.description}</p><p>${count}件の商品</p></div>
+      </a>`;
+    }).join("");
+  </script>
+</body>
+</html>

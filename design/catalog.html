@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>商品一覧｜ANDA</title>
+  <link rel="stylesheet" href="assets/css/reference-base.css">
+  <link rel="stylesheet" href="assets/css/anda-theme.css">
+</head>
+<body class="is-show">
+  <div id="pagetop">
+    <div data-site-chrome></div>
+    <div class="siteBody siteBody--inner">
+      <main class="pageShell" data-catalog>
+        <nav class="breadcrumb" data-catalog-crumb></nav>
+        <h1 class="pageShell_title" data-catalog-title>商品一覧</h1>
+        <p class="pageShell_lead" data-catalog-lead>カテゴリーや並び替えで商品を探せます。</p>
+        <div class="catalog-toolbar">
+          <div class="catalog-filters" data-catalog-filters></div>
+          <div class="catalog-sort">
+            <span data-catalog-count>0件</span>
+            <label>並び替え
+              <select data-catalog-sort>
+                <option value="popular">人気順</option>
+                <option value="new">新着順</option>
+                <option value="price-asc">価格が安い順</option>
+                <option value="price-desc">価格が高い順</option>
+                <option value="name">名前順</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="index_product_season" data-catalog-grid></div>
+        <p class="page-empty" data-catalog-empty hidden>該当する商品がありません。</p>
+      </main>
+      <div data-site-footer></div>
+    </div>
+  </div>
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/cart-ui.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/site-ui.js"></script>
+  <script src="assets/js/catalog.js"></script>
+</body>
+</html>

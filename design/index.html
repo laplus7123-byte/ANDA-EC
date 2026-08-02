@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ANDA｜北海道の海産物お取り寄せ</title>
+  <meta name="description" content="北海道の海が育んだ鮮度と旨みを、ご自宅へ。厳選海産物のお取り寄せ。">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="assets/css/reference-base.css">
+  <link rel="stylesheet" href="assets/css/anda-theme.css">
+</head>
+<body class="is-show">
+  <div id="pagetop">
+    <div class="announce">
+      <a href="guide.html#shipping" class="announce_shipping">税込8,000円以上のご購入で<span class="color-secondary">送料無料</span> <span class="detail">詳細はこちら</span></a>
+      <a href="guide.html#payment" class="announce_business">お支払い：クレジット / 銀行振込</a>
+    </div>
+
+    <header id="siteHeader" class="siteHeader">
+      <div class="siteHeader_container">
+        <div class="siteHeader_logo">
+          <h1 class="siteHeader_logo_text">
+            <span class="brand">ANDA</span>
+            <span class="sub">北海道の海産物</span>
+          </h1>
+          <div class="siteHeader_logo_icon">
+            <img src="assets/images/icons/logo_h.svg" alt="ANDA">
+          </div>
+        </div>
+
+        <div class="siteHeader_top">
+          <div class="siteHeader_top_tel">
+            <a href="contact.html" class="siteHeader_top_tel_link">
+              <div class="siteHeader_top_tel_link_textArea">
+                <div class="num">お問い合わせ</div>
+                <div class="time">平日9時〜17時</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="siteHeader_top_search">
+            <form action="catalog.html" method="GET">
+              <input type="text" name="q" placeholder="キーワードで検索">
+              <button type="submit" value="search"><img src="assets/images/icons/icon_search.svg" alt="検索"></button>
+            </form>
+          </div>
+
+          <button class="siteHeader_top_icon siteHeader_top_icon-search sp_search_toggle" type="button" data-search-toggle>
+            <i class="icon"><img src="assets/images/icons/icon_search.svg" alt="検索"></i>
+            <div class="text">検索</div>
+          </button>
+
+          <a href="catalog.html?cat=recommend" class="siteHeader_top_icon siteHeader_top_icon-favo">
+            <i class="icon"><img src="assets/images/icons/icon_heart.svg" alt="おすすめ"></i>
+            <div class="text">おすすめ</div>
+          </a>
+
+          <a href="guide.html#account" class="siteHeader_top_icon siteHeader_top_icon-login">
+            <i class="icon"><img src="assets/images/icons/icon_person.svg" alt="ログイン"></i>
+            <div class="text">ログイン</div>
+          </a>
+
+          <a href="cart.html" class="siteHeader_top_icon siteHeader_top_icon-cart">
+            <i class="icon"><img src="assets/images/icons/icon_cart.svg" alt="カート"></i>
+            <div class="text">カート</div>
+            <em class="cart-count" style="position:absolute;top:4px;right:4px;background:#C45C48;color:#fff;border-radius:50%;min-width:17px;height:17px;font-size:10px;display:flex;align-items:center;justify-content:center;font-style:normal;">0</em>
+          </a>
+          <button type="button" class="siteHeader_top_icon siteHeader_top_icon-toggle nav-toggle" data-nav-open>
+            <i class="toggleBar">
+              <span class="bar bar-top"></span>
+              <span class="bar bar-mid"></span>
+              <span class="bar bar-btm"></span>
+            </i>
+            <div class="text">メニュー</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="siteHeader_nav">
+        <div class="siteHeader_nav_pc">
+          <ul class="pcNav">
+            <li class="pcNav_item">
+              <a href="catalog.html?cat=recommend" class="pcNav_link">おすすめ</a>
+            </li>
+            <li class="pcNav_item pcNav_item-parent">
+              <a href="categories.html" class="pcNav_link pcNav_link-parent">商品カテゴリ</a>
+              <div class="pcNav_item_sub">
+                <div class="pcNav_item_sub_overlay"></div>
+                <div class="pcNav_item_sub_bg">
+                  <img src="assets/images/about.jpg" alt="">
+                </div>
+                <div class="pcNav_item_sub_navArea">
+                  <p class="pcNav_item_sub_title">商品カテゴリ一覧</p>
+                  <ul class="pcNav_item_sub_list">
+                    <li class="pcNav_item_sub_list_item">
+                      <a href="categories.html" class="pcNav_item_sub_list_link">すべてのカテゴリを見る</a>
+                    </li>
+                    <li class="pcNav_item_sub_list_item">
+                      <a href="catalog.html?cat=recommend" class="pcNav_item_sub_list_link">おすすめ</a>
+                    </li>
+                    <li class="pcNav_item_sub_list_item">
+                      <a href="catalog.html?cat=seafood" class="pcNav_item_sub_list_link">海産物</a>
+                    </li>
+                    <li class="pcNav_item_sub_list_item">
+                      <a href="catalog.html?cat=processed" class="pcNav_item_sub_list_link">加工品</a>
+                    </li>
+                    <li class="pcNav_item_sub_list_item">
+                      <a href="catalog.html?cat=gift" class="pcNav_item_sub_list_link">ギフト・セット</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class="pcNav_item">
+              <a href="about.html" class="pcNav_link">こだわり</a>
+            </li>
+            <li class="pcNav_item">
+              <a href="guide.html" class="pcNav_link">ご利用案内</a>
+            </li>
+            <li class="pcNav_item">
+              <a href="news.html" class="pcNav_link">お知らせ</a>
+            </li>
+            <li class="pcNav_item">
+              <a href="contact.html" class="pcNav_link">お問い合わせ</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="siteHeader_nav_sp">
+          <div class="siteHeader_nav_sp_overlay" data-nav-close></div>
+          <div class="siteHeader_nav_sp_wrap">
+            <div class="siteHeader_nav_sp_header">
+              <button class="nav-toggle" type="button" data-nav-close>
+                <img src="assets/images/icons/close.svg" alt="閉じる">
+              </button>
+            </div>
+            <nav class="siteHeader_nav_sp_navArea">
+              <ul class="spNav_list">
+                <li><a class="spNav_list_link" href="catalog.html?cat=recommend">おすすめ</a></li>
+                <li><a class="spNav_list_link" href="categories.html">商品カテゴリ</a></li>
+                <li><a class="spNav_list_link" href="catalog.html?cat=seafood">海産物</a></li>
+                <li><a class="spNav_list_link" href="catalog.html?cat=processed">加工品</a></li>
+                <li><a class="spNav_list_link" href="catalog.html?cat=gift">ギフト・セット</a></li>
+                <li><a class="spNav_list_link" href="about.html">こだわり</a></li>
+                <li><a class="spNav_list_link" href="guide.html">ご利用案内</a></li>
+                <li><a class="spNav_list_link" href="faq.html">よくあるご質問</a></li>
+                <li><a class="spNav_list_link" href="news.html">お知らせ</a></li>
+                <li><a class="spNav_list_link" href="contact.html">お問い合わせ</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="siteHeader_sp">
+        <div class="siteHeader_sp_tel">
+          <a href="contact.html" class="siteHeader_top_tel_link">
+            <div class="siteHeader_top_tel_link_textArea">
+              <div class="num">お問い合わせ</div>
+              <div class="time">平日9時〜17時</div>
+            </div>
+          </a>
+        </div>
+        <div class="siteHeader_sp_search">
+          <button type="button" class="siteHeader_sp_search_toggle" data-sp-search-open>
+            商品を検索 <i><img src="assets/images/icons/icon_search.svg" alt=""></i>
+          </button>
+          <div class="siteHeader_sp_search_input">
+            <form class="inputArea" action="catalog.html" method="GET">
+              <input name="q" type="text" placeholder="キーワードで検索">
+              <button type="submit"><img src="assets/images/icons/icon_search.svg" alt="検索"></button>
+            </form>
+            <button type="button" data-sp-search-close><img src="assets/images/icons/close.svg" alt="閉じる"></button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="siteBody top">
+      <div id="firstView">
+        <div class="firstView">
+          <div class="firstView_mainContents">
+            <div class="swiper swiper-main">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <a href="catalog.html?cat=seafood" class="firstView_slide">
+                    <picture>
+                      <source media="(min-width: 920px)" srcset="assets/images/hero/01-pc.jpg" width="2100" height="1180">
+                      <img src="assets/images/hero/01.jpg" alt="北の海の恵み" width="1125" height="1122" fetchpriority="high">
+                    </picture>
+                  </a>
+                </div>
+                <div class="swiper-slide">
+                  <a href="catalog.html?cat=recommend" class="firstView_slide">
+                    <picture>
+                      <source media="(min-width: 920px)" srcset="assets/images/hero/02-pc.jpg" width="2100" height="1180">
+                      <img src="assets/images/hero/02.jpg" alt="おすすめの海産物" width="1125" height="1122">
+                    </picture>
+                  </a>
+                </div>
+                <div class="swiper-slide">
+                  <a href="catalog.html?cat=gift" class="firstView_slide">
+                    <picture>
+                      <source media="(min-width: 920px)" srcset="assets/images/hero/03-pc.jpg" width="2100" height="1180">
+                      <img src="assets/images/hero/03.jpg" alt="ギフト・セット" width="1125" height="1122">
+                    </picture>
+                  </a>
+                </div>
+                <div class="swiper-slide">
+                  <a href="about.html" class="firstView_slide">
+                    <picture>
+                      <source media="(min-width: 920px)" srcset="assets/images/hero/04-pc.jpg" width="2100" height="1180">
+                      <img src="assets/images/hero/04.jpg" alt="ANDAのこだわり" width="1125" height="1122">
+                    </picture>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="firstView_thumbContents">
+            <div class="firstView_thumbContents-pc firstView_thumbContents_list">
+              <div class="firstView_thumbContents_list_item">
+                <figure class="firstView_thumb thumb-media-active">
+                  <img src="assets/images/hero/01.jpg" alt="">
+                  <figcaption>北の海の恵み</figcaption>
+                </figure>
+              </div>
+              <div class="firstView_thumbContents_list_item">
+                <figure class="firstView_thumb">
+                  <img src="assets/images/hero/02.jpg" alt="">
+                  <figcaption>おすすめの海産物</figcaption>
+                </figure>
+              </div>
+              <div class="firstView_thumbContents_list_item">
+                <figure class="firstView_thumb">
+                  <img src="assets/images/hero/03.jpg" alt="">
+                  <figcaption>ギフト・セット</figcaption>
+                </figure>
+              </div>
+              <div class="firstView_thumbContents_list_item">
+                <figure class="firstView_thumb">
+                  <img src="assets/images/hero/04.jpg" alt="">
+                  <figcaption>ANDAのこだわり</figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div class="firstView_thumbContents-sp swiper swiper-thumb">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <figure class="firstView_thumb">
+                    <img src="assets/images/hero/01.jpg" alt="">
+                    <figcaption>北の海の恵み</figcaption>
+                  </figure>
+                </div>
+                <div class="swiper-slide">
+                  <figure class="firstView_thumb">
+                    <img src="assets/images/hero/02.jpg" alt="">
+                    <figcaption>おすすめの海産物</figcaption>
+                  </figure>
+                </div>
+                <div class="swiper-slide">
+                  <figure class="firstView_thumb">
+                    <img src="assets/images/hero/03.jpg" alt="">
+                    <figcaption>ギフト・セット</figcaption>
+                  </figure>
+                </div>
+                <div class="swiper-slide">
+                  <figure class="firstView_thumb">
+                    <img src="assets/images/hero/04.jpg" alt="">
+                    <figcaption>ANDAのこだわり</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="index_top_section">
+        <div class="commonPadding">
+          <h2 class="index_top_section_title">重要なお知らせ</h2>
+          <ul class="important_news">
+            <li><a href="news.html"><time datetime="2026-08-01">2026.08.01</time> 夏季配送について：クール便でのお届けとなります</a></li>
+            <li><a href="news.html"><time datetime="2026-07-20">2026.07.20</time> 新商品を入荷しました</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="index_top_section">
+        <div class="commonPadding">
+          <h2 class="index_top_section_title">人気のカテゴリー</h2>
+          <div class="index_top_category">
+            <div class="swiper swiper-overflow">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <a href="catalog.html?cat=recommend" class="index_top_category_card">
+                    <div class="index_top_category_card_img">
+                      <img src="assets/images/category/01.jpg" width="237" height="316" loading="lazy" alt="おすすめ">
+                    </div>
+                    <p class="index_top_category_card_title">おすすめ</p>
+                  </a>
+                </div>
+                <div class="swiper-slide">
+                  <a href="catalog.html?cat=seafood" class="index_top_category_card">
+                    <div class="index_top_category_card_img">
+                      <img src="assets/images/category/02.jpg" width="237" height="316" loading="lazy" alt="海産物">
+                    </div>
+                    <p class="index_top_category_card_title">海産物</p>
+                  </a>
+                </div>
+                <div class="swiper-slide">
+                  <a href="catalog.html?cat=processed" class="index_top_category_card">
+                    <div class="index_top_category_card_img">
+                      <img src="assets/images/category/03.jpg" width="237" height="316" loading="lazy" alt="加工品">
+                    </div>
+                    <p class="index_top_category_card_title">加工品</p>
+                  </a>
+                </div>
+                <div class="swiper-slide">
+                  <a href="catalog.html?cat=gift" class="index_top_category_card">
+                    <div class="index_top_category_card_img">
+                      <img src="assets/images/category/04.jpg" width="237" height="316" loading="lazy" alt="ギフト・セット">
+                    </div>
+                    <p class="index_top_category_card_title">ギフト・セット</p>
+                  </a>
+                </div>
+                <div class="swiper-slide">
+                  <a href="categories.html" class="index_top_category_card index_top_category_card-all">
+                    <div class="index_top_category_card_img"></div>
+                    <p class="index_top_category_card_title index_top_category_card-all_title">すべてのカテゴリを見る</p>
+                    <i></i>
+                  </a>
+                </div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-scrollbar"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="index_about index_top_section">
+        <div class="index_about_bg">
+          <picture>
+            <source media="(min-width: 920px)" srcset="assets/images/about-pc.jpg" width="1600" height="900">
+            <img src="assets/images/about.jpg" width="750" height="1200" loading="lazy" alt="ANDAについて">
+          </picture>
+        </div>
+        <div class="index_about_titleArea">
+          <h2 class="index_about_title">
+            ANDAは<br>北の海と<br>食卓を繋ぐ<br>海産物の<br>お取り寄せ店です
+          </h2>
+          <p class="index_about_title_en">about<br>anda</p>
+        </div>
+        <div class="index_about_textArea">
+          <p>
+            北海道の浜で水揚げされた海産物を、鮮度を落とさないままお届けします。
+            まずは大枠のカテゴリーからスタートし、運用にあわせて品揃えを広げていきます。
+          </p>
+          <a href="about.html" class="btnRound btnRound-white">ANDAについて</a>
+        </div>
+      </section>
+
+      <div id="index_product" class="index_product list_column">
+        <section>
+          <h2 class="index_readContent_title top_season_title">おすすめ商品</h2>
+          <div class="commonPadding">
+            <div class="index_product_season" id="topRecommend"></div>
+            <p style="margin-top:40rem;text-align:center">
+              <a href="catalog.html?cat=recommend" class="btnRound">おすすめ一覧を見る</a>
+            </p>
+          </div>
+        </section>
+
+        <section class="index_product_ranking" style="margin-top:60rem">
+          <h2 class="index_readContent_title top_ranking_title">人気ランキング</h2>
+          <div class="commonPadding">
+            <div class="swiper swiper-overflow-ranking">
+              <div class="swiper-wrapper" id="topRanking"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="index_top_section">
+        <div class="commonPadding">
+          <h2 class="index_readContent_title">お客様の声</h2>
+          <div class="anda-review-row">
+            <blockquote class="anda-review-card">
+              <p>いくらの粒が大きく、解凍してもプリプリでした。</p>
+              <cite>東京都・K様</cite>
+            </blockquote>
+            <blockquote class="anda-review-card">
+              <p>ホタテが甘くて驚きました。家族みんなが大絶賛です。</p>
+              <cite>大阪府・M様</cite>
+            </blockquote>
+            <blockquote class="anda-review-card">
+              <p>ギフトで送りました。梱包もしっかりしていて安心でした。</p>
+              <cite>神奈川県・S様</cite>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section class="index_top_section">
+        <div class="commonPadding">
+          <h2 class="index_readContent_title">お知らせ</h2>
+          <ul class="important_news">
+            <li><a href="news.html"><time datetime="2026-08-01">2026.08.01</time> 夏季の配送スケジュールについて</a></li>
+            <li><a href="news.html"><time datetime="2026-07-15">2026.07.15</time> 新商品入荷のお知らせ</a></li>
+            <li><a href="tokusho.html"><time datetime="2026-06-28">2026.06.28</time> 特定商取引法に基づく表記を更新しました</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="foot_guide">
+        <div class="foot_guide_column">
+          <section class="foot_guide_section">
+            <h2 class="foot_guide_section_title">送料・配送について</h2>
+            <dl class="foot_guide_list">
+              <dt>8,000円以上で送料無料</dt>
+              <dd>1回のご注文金額が8,000円（税込）以上の場合、送料無料となります。クール便でのお届けが基本です。</dd>
+              <dt>お届けにかかる日数</dt>
+              <dd>ご注文確認後、準備が整い次第発送いたします。詳細はご利用案内をご確認ください。</dd>
+            </dl>
+          </section>
+          <section class="foot_guide_section">
+            <h2 class="foot_guide_section_title">お支払い方法</h2>
+            <dl class="foot_guide_list">
+              <dt>クレジットカード</dt>
+              <dd>各種クレジットカードをご利用いただけます（WordPress構築時に連携）。</dd>
+              <dt>銀行振込</dt>
+              <dd>ご注文後に振込先をご案内します。</dd>
+            </dl>
+          </section>
+          <section class="foot_guide_section">
+            <h2 class="foot_guide_section_title">返品・交換について</h2>
+            <dl class="foot_guide_list">
+              <dt>返品・交換</dt>
+              <dd>商品不良などの場合、商品到着後7日以内にご連絡ください。詳しくは<a href="guide.html#return" class="link-inner">ご利用案内</a>へ。</dd>
+            </dl>
+          </section>
+        </div>
+      </div>
+
+      <footer class="siteFooter">
+        <div class="commonPadding" style="padding-top:40px;padding-bottom:40px">
+          <p style="font-family:Barlow,sans-serif;letter-spacing:.22em;font-size:22px;margin:0 0 12px">ANDA</p>
+          <p style="font-size:12px;line-height:1.8;opacity:.75;margin:0 0 24px">北海道の海産物お取り寄せ（店舗名は仮称）</p>
+          <nav>
+            <ul style="display:flex;flex-wrap:wrap;gap:12px 20px;list-style:none;padding:0;margin:0;font-size:12px">
+              <li><a href="categories.html">カテゴリー一覧</a></li>
+              <li><a href="about.html">こだわり</a></li>
+              <li><a href="guide.html">ご利用案内</a></li>
+              <li><a href="faq.html">FAQ</a></li>
+              <li><a href="contact.html">お問い合わせ</a></li>
+              <li><a href="tokusho.html">特定商取引法</a></li>
+              <li><a href="privacy.html">プライバシーポリシー</a></li>
+            </ul>
+          </nav>
+          <p style="margin:32px 0 0;font-size:11px;opacity:.5;text-align:center">&copy; ANDA. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/cart-ui.js"></script>
+  <script src="assets/js/site-ui.js"></script>
+  <script src="assets/js/top.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+ID,SKU,Name,Published,Is featured?,Visibility in catalog,Short description,Description,Tax status,In stock?,Stock,Regular price,Categories,Images,Meta: _anda_note
+,ANDA-IKURA-500,北海道産 いくら醤油漬け 500g,1,1,visible,粒が大きく解凍後もハリのある醤油漬けいくら,北海道産のいくらを丁寧に醤油漬けにしました。丼や手巻き寿司に。,taxable,1,50,8800,"海産物, おすすめ",https://example.com/images/products/p01.jpg,画像URLは公開URLまたはサーバー上のパスを指定
+,ANDA-HOTATE-1KG,オホーツク 生冷凍ホタテ貝柱 1kg,1,1,visible,甘みが強いオホーツク産の貝柱,鮮度のよいホタテ貝柱を急速冷凍。,taxable,1,40,6480,"海産物, おすすめ",https://example.com/images/products/p02.jpg,
+,ANDA-SAKE-10,秋鮭 切り身セット 10切,1,1,visible,朝食やお弁当に使いやすい切り身セット,北海道の秋鮭を食べやすい切り身に。,taxable,1,60,3980,"海産物, おすすめ",https://example.com/images/products/p03.jpg,
+,ANDA-KANI-2,ボイル毛ガニ 約500g × 2尾,1,0,visible,身入りのよい毛ガニをボイルしてお届け,解凍して食べるだけで本格的な蟹料理に。,taxable,1,20,9900,海産物,https://example.com/images/products/p04.jpg,
+,ANDA-HOKKE-3,開きホッケ 3枚セット,1,1,visible,脂の乗ったホッケの開き,北海道らしい干物の定番。,taxable,1,80,2480,"加工品, おすすめ",https://example.com/images/products/p05.jpg,
+,ANDA-GIFT-DON,海鮮丼セット（3〜4人前）,1,1,visible,ご自宅で北海道の海鮮丼を楽しめるセット,いくら・ホタテなどを組み合わせた丼セット。,taxable,1,30,7200,"ギフト・セット, おすすめ",https://example.com/images/products/p08.jpg,

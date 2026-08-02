@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>お問い合わせ｜ANDA</title>
+  <link rel="stylesheet" href="assets/css/reference-base.css">
+  <link rel="stylesheet" href="assets/css/anda-theme.css">
+</head>
+<body class="is-show">
+  <div id="pagetop">
+    <div data-site-chrome></div>
+    <div class="siteBody siteBody--inner">
+      <main class="pageShell">
+        <nav class="breadcrumb"><a href="index.html">トップ</a><span>/</span><span>お問い合わせ</span></nav>
+        <h1 class="pageShell_title">お問い合わせ</h1>
+        <p class="pageShell_lead">平日 9:00–17:00（デモフォーム）</p>
+        <form class="form-stack" onsubmit="event.preventDefault(); alert('送信デモです。WordPress構築時に接続します。');">
+          <label>お名前<input type="text" required></label>
+          <label>メールアドレス<input type="email" required></label>
+          <label>お問い合わせ種別
+            <select><option>商品について</option><option>配送について</option><option>お支払いについて</option><option>その他</option></select>
+          </label>
+          <label>内容<textarea rows="6" required></textarea></label>
+          <button type="submit" class="anda-btn anda-btn-primary" style="width:auto">送信する（デモ）</button>
+        </form>
+      </main>
+      <div data-site-footer></div>
+    </div>
+  </div>
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/site-ui.js"></script>
+</body>
+</html>
