@@ -12,7 +12,7 @@ Thumbs.db
 
 # Generated / temp
 design/_shot-*.png
-design/assets/images/_sized/
+**/assets/images/_sized/
 
 # Scraped reference site (local only)
 参考サイト/
