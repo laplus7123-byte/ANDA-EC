@@ -1,16 +1,20 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Check, Copy, Plus, Star } from 'lucide-react'
-import type { PromptTemplate } from '../types'
+import { Bot, Check, Copy, Plus, Star } from 'lucide-react'
+import { completeChat } from '../lib/ai'
+import type { AiSettings, FixedPrompt, PromptTemplate } from '../types'
 import { Modal } from './Modal'
 import { PageHeader } from './PageHeader'
 
 interface Props {
   prompts: PromptTemplate[]
+  settings: AiSettings
+  fixedPrompts: FixedPrompt[]
   onSave: (
     prompt: Partial<PromptTemplate> & { title: string; body: string },
   ) => void
   onDelete: (id: string) => void
   onToggleFavorite: (id: string) => void
+  onSaveAiResult: (userContent: string, assistantContent: string, title?: string) => void
 }
 
 const SLASH_SNIPPETS = [
@@ -35,9 +39,12 @@ function fillTemplate(body: string, values: Record<string, string>) {
 
 export function PromptsView({
   prompts,
+  settings,
+  fixedPrompts,
   onSave,
   onDelete,
   onToggleFavorite,
+  onSaveAiResult,
 }: Props) {
   const [selectedId, setSelectedId] = useState(prompts[0]?.id ?? '')
   const [query, setQuery] = useState('')
@@ -47,6 +54,10 @@ export function PromptsView({
   const [editorOpen, setEditorOpen] = useState(false)
   const [editing, setEditing] = useState<PromptTemplate | null>(null)
   const [form, setForm] = useState({ title: '', category: '一般', body: '' })
+  const [aiBusy, setAiBusy] = useState(false)
+  const [aiError, setAiError] = useState('')
+  const [aiResult, setAiResult] = useState('')
+  const [aiMode, setAiMode] = useState<'api' | 'demo' | null>(null)
 
   const sorted = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -68,6 +79,8 @@ export function PromptsView({
     setDraft(selected.body)
     setValues({})
     setSelectedId(selected.id)
+    setAiResult('')
+    setAiError('')
   }, [selected?.id])
 
   const variables = useMemo(() => extractVars(draft), [draft])
@@ -89,6 +102,25 @@ export function PromptsView({
     await navigator.clipboard.writeText(preview)
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1600)
+  }
+
+  const runAi = async () => {
+    setAiBusy(true)
+    setAiError('')
+    try {
+      const { text, mode } = await completeChat({
+        settings,
+        fixedPrompts,
+        userContent: preview,
+      })
+      setAiResult(text)
+      setAiMode(mode)
+      onSaveAiResult(preview, text, selected?.title)
+    } catch (err) {
+      setAiError(err instanceof Error ? err.message : 'AI実行に失敗しました')
+    } finally {
+      setAiBusy(false)
+    }
   }
 
   const openCreate = () => {
@@ -119,10 +151,12 @@ export function PromptsView({
     setEditorOpen(false)
   }
 
+  const enabledFixed = fixedPrompts.filter((f) => f.enabled).length
+
   return (
     <PageHeader
       title="プロンプト補完"
-      description="テンプレ選択・変数埋め込み・スラッシュ補完で、社内AIプロンプトをすぐ使える形に整えます。"
+      description="テンプレ選択・変数埋め込み・スラッシュ補完のあと、画面内でそのままAI実行できます。"
       actions={
         <button type="button" className="primary-btn" onClick={openCreate}>
           <Plus size={16} style={{ marginRight: 6, verticalAlign: -3 }} />
@@ -165,7 +199,7 @@ export function PromptsView({
               <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12 }}>
                 <div>
                   <div style={{ color: 'var(--muted)', fontSize: '0.8rem' }}>
-                    {selected.category}
+                    {selected.category} · 固定プロンプト {enabledFixed} 件が自動付与
                   </div>
                   <h2
                     style={{
@@ -274,7 +308,7 @@ export function PromptsView({
                 </div>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, flexWrap: 'wrap' }}>
                 <button
                   type="button"
                   className="secondary-btn"
@@ -290,7 +324,7 @@ export function PromptsView({
                 >
                   テンプレに反映
                 </button>
-                <button type="button" className="primary-btn" onClick={copyPreview}>
+                <button type="button" className="secondary-btn" onClick={copyPreview}>
                   {copied ? (
                     <>
                       <Check size={16} style={{ marginRight: 6, verticalAlign: -3 }} />
@@ -299,11 +333,36 @@ export function PromptsView({
                   ) : (
                     <>
                       <Copy size={16} style={{ marginRight: 6, verticalAlign: -3 }} />
-                      プロンプトをコピー
+                      コピー
                     </>
                   )}
                 </button>
+                <button
+                  type="button"
+                  className="primary-btn"
+                  onClick={runAi}
+                  disabled={aiBusy}
+                >
+                  <Bot size={16} style={{ marginRight: 6, verticalAlign: -3 }} />
+                  {aiBusy ? 'AI実行中…' : '画面内でAI実行'}
+                </button>
               </div>
+
+              {aiError ? (
+                <div className="form-error" role="alert">
+                  {aiError}
+                </div>
+              ) : null}
+
+              {aiResult ? (
+                <div className="field" style={{ marginTop: 4 }}>
+                  <label>
+                    AI応答
+                    {aiMode ? `（${aiMode === 'demo' ? 'デモ' : 'API'}）` : ''}
+                  </label>
+                  <div className="preview-box ai-result-box">{aiResult}</div>
+                </div>
+              ) : null}
             </>
           ) : (
             <div className="empty">左からテンプレを選ぶか、新規作成してください</div>

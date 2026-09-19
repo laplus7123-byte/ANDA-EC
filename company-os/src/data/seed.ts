@@ -1,3 +1,4 @@
+import { defaultAiSettings, defaultFixedPrompts } from './aiDefaults'
 import type { AppState } from '../types'
 
 const today = new Date()
@@ -197,4 +198,7 @@ export const seedState: AppState = {
       updatedAt: iso(-4).toISOString(),
     },
   ],
+  fixedPrompts: structuredClone(defaultFixedPrompts),
+  aiSettings: structuredClone(defaultAiSettings),
+  aiHistory: [],
 }

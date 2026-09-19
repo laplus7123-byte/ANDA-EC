@@ -38,15 +38,25 @@ export function HomeView({ tasks, events, onNavigate }: Props) {
         <section className="panel home-hero">
           <h2>仕事の流れを、ひとつに結ぶ。</h2>
           <p>
-            Notion の進化版イメージで、進捗管理・予定・AIプロンプト補完を同じワークスペースに統合しました。
+            個人利用向け。タスク・予定・固定プロンプト付きの画面内AIを、ひとつのワークスペースに統合しました。
           </p>
-          <button
-            type="button"
-            className="primary-btn"
-            onClick={() => onNavigate('tasks')}
-          >
-            タスクボードを開く
-          </button>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', position: 'relative', zIndex: 1 }}>
+            <button
+              type="button"
+              className="primary-btn"
+              onClick={() => onNavigate('ai')}
+            >
+              AIを開く
+            </button>
+            <button
+              type="button"
+              className="secondary-btn"
+              style={{ background: 'rgba(255,255,255,0.16)', color: '#fff', borderColor: 'rgba(255,255,255,0.35)' }}
+              onClick={() => onNavigate('tasks')}
+            >
+              タスクボード
+            </button>
+          </div>
         </section>
 
         <div>

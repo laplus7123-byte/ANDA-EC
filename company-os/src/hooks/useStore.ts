@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
+import { defaultAiSettings, defaultFixedPrompts } from '../data/aiDefaults'
 import { seedState } from '../data/seed'
-
-const uuid = () => crypto.randomUUID()
 import type {
+  AiMessage,
+  AiSettings,
   AppState,
+  FixedPrompt,
   PromptTemplate,
   ScheduleEvent,
   Task,
@@ -12,12 +14,26 @@ import type {
 } from '../types'
 
 const STORAGE_KEY = 'knot-workspace-v1'
+const uuid = () => crypto.randomUUID()
+
+function migrate(raw: Partial<AppState> | null): AppState {
+  const base = structuredClone(seedState)
+  if (!raw) return base
+  return {
+    tasks: raw.tasks ?? base.tasks,
+    events: raw.events ?? base.events,
+    prompts: raw.prompts ?? base.prompts,
+    fixedPrompts: raw.fixedPrompts ?? structuredClone(defaultFixedPrompts),
+    aiSettings: { ...defaultAiSettings, ...(raw.aiSettings ?? {}) },
+    aiHistory: raw.aiHistory ?? [],
+  }
+}
 
 function loadState(): AppState {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return structuredClone(seedState)
-    return JSON.parse(raw) as AppState
+    return migrate(JSON.parse(raw) as Partial<AppState>)
   } catch {
     return structuredClone(seedState)
   }
@@ -36,11 +52,16 @@ export function useStore() {
 
   const resetDemo = useCallback(() => {
     const next = structuredClone(seedState)
-    setState(next)
-    saveState(next)
+    // keep AI settings / fixed prompts / history across demo reset of tasks
+    setState((prev) => ({
+      ...next,
+      aiSettings: prev.aiSettings,
+      fixedPrompts: prev.fixedPrompts,
+      aiHistory: prev.aiHistory,
+    }))
   }, [])
 
-  const upsertTask = useCallback(( partial: Partial<Task> & { title: string }) => {
+  const upsertTask = useCallback((partial: Partial<Task> & { title: string }) => {
     setState((prev) => {
       const now = new Date().toISOString()
       if (partial.id) {
@@ -173,6 +194,63 @@ export function useStore() {
     }))
   }, [])
 
+  const updateAiSettings = useCallback((patch: Partial<AiSettings>) => {
+    setState((prev) => ({
+      ...prev,
+      aiSettings: { ...prev.aiSettings, ...patch },
+    }))
+  }, [])
+
+  const upsertFixedPrompt = useCallback(
+    (partial: Partial<FixedPrompt> & { title: string; body: string }) => {
+      setState((prev) => {
+        if (partial.id) {
+          return {
+            ...prev,
+            fixedPrompts: prev.fixedPrompts.map((f) =>
+              f.id === partial.id ? { ...f, ...partial } : f,
+            ),
+          }
+        }
+        const next: FixedPrompt = {
+          id: uuid(),
+          title: partial.title,
+          body: partial.body,
+          enabled: partial.enabled ?? true,
+        }
+        return { ...prev, fixedPrompts: [...prev.fixedPrompts, next] }
+      })
+    },
+    [],
+  )
+
+  const deleteFixedPrompt = useCallback((id: string) => {
+    setState((prev) => ({
+      ...prev,
+      fixedPrompts: prev.fixedPrompts.filter((f) => f.id !== id),
+    }))
+  }, [])
+
+  const toggleFixedPrompt = useCallback((id: string) => {
+    setState((prev) => ({
+      ...prev,
+      fixedPrompts: prev.fixedPrompts.map((f) =>
+        f.id === id ? { ...f, enabled: !f.enabled } : f,
+      ),
+    }))
+  }, [])
+
+  const appendAiMessages = useCallback((msgs: AiMessage[]) => {
+    setState((prev) => ({
+      ...prev,
+      aiHistory: [...prev.aiHistory, ...msgs].slice(-80),
+    }))
+  }, [])
+
+  const clearAiHistory = useCallback(() => {
+    setState((prev) => ({ ...prev, aiHistory: [] }))
+  }, [])
+
   return {
     ...state,
     upsertTask,
@@ -183,6 +261,12 @@ export function useStore() {
     upsertPrompt,
     deletePrompt,
     toggleFavorite,
+    updateAiSettings,
+    upsertFixedPrompt,
+    deleteFixedPrompt,
+    toggleFixedPrompt,
+    appendAiMessages,
+    clearAiHistory,
     resetDemo,
   }
 }

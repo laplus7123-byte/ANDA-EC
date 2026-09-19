@@ -135,12 +135,19 @@ export function TasksView({ tasks, onSave, onDelete, onMove }: Props) {
                   <span className="pill">{items.length}</span>
                 </div>
                 {items.map((task, i) => (
-                  <button
+                  <article
                     key={task.id}
-                    type="button"
                     className="task-card"
-                    style={{ animationDelay: `${i * 40}ms` }}
+                    style={{ animationDelay: `${i * 40}ms`, cursor: 'pointer' }}
                     onClick={() => openEdit(task)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        openEdit(task)
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
                   >
                     <h4>{task.title}</h4>
                     {task.description ? (
@@ -175,7 +182,7 @@ export function TasksView({ tasks, onSave, onDelete, onMove }: Props) {
                           </button>
                         ))}
                     </div>
-                  </button>
+                  </article>
                 ))}
                 {items.length === 0 ? (
                   <div className="empty">タスクなし</div>
