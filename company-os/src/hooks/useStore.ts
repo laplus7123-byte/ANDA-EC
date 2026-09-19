@@ -1,0 +1,188 @@
+import { useCallback, useEffect, useState } from 'react'
+import { seedState } from '../data/seed'
+
+const uuid = () => crypto.randomUUID()
+import type {
+  AppState,
+  PromptTemplate,
+  ScheduleEvent,
+  Task,
+  TaskPriority,
+  TaskStatus,
+} from '../types'
+
+const STORAGE_KEY = 'knot-workspace-v1'
+
+function loadState(): AppState {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (!raw) return structuredClone(seedState)
+    return JSON.parse(raw) as AppState
+  } catch {
+    return structuredClone(seedState)
+  }
+}
+
+function saveState(state: AppState) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+}
+
+export function useStore() {
+  const [state, setState] = useState<AppState>(() => loadState())
+
+  useEffect(() => {
+    saveState(state)
+  }, [state])
+
+  const resetDemo = useCallback(() => {
+    const next = structuredClone(seedState)
+    setState(next)
+    saveState(next)
+  }, [])
+
+  const upsertTask = useCallback(( partial: Partial<Task> & { title: string }) => {
+    setState((prev) => {
+      const now = new Date().toISOString()
+      if (partial.id) {
+        return {
+          ...prev,
+          tasks: prev.tasks.map((t) =>
+            t.id === partial.id ? { ...t, ...partial, updatedAt: now } : t,
+          ),
+        }
+      }
+      const task: Task = {
+        id: uuid(),
+        title: partial.title,
+        description: partial.description ?? '',
+        status: (partial.status as TaskStatus) ?? 'todo',
+        priority: (partial.priority as TaskPriority) ?? 'medium',
+        dueDate: partial.dueDate ?? null,
+        tags: partial.tags ?? [],
+        assignee: partial.assignee ?? '',
+        createdAt: now,
+        updatedAt: now,
+      }
+      return { ...prev, tasks: [task, ...prev.tasks] }
+    })
+  }, [])
+
+  const deleteTask = useCallback((id: string) => {
+    setState((prev) => ({
+      ...prev,
+      tasks: prev.tasks.filter((t) => t.id !== id),
+      events: prev.events.map((e) =>
+        e.taskId === id ? { ...e, taskId: null } : e,
+      ),
+    }))
+  }, [])
+
+  const moveTask = useCallback((id: string, status: TaskStatus) => {
+    setState((prev) => ({
+      ...prev,
+      tasks: prev.tasks.map((t) =>
+        t.id === id
+          ? { ...t, status, updatedAt: new Date().toISOString() }
+          : t,
+      ),
+    }))
+  }, [])
+
+  const upsertEvent = useCallback(
+    (partial: Partial<ScheduleEvent> & { title: string; date: string }) => {
+      setState((prev) => {
+        if (partial.id) {
+          return {
+            ...prev,
+            events: prev.events.map((e) =>
+              e.id === partial.id ? { ...e, ...partial } : e,
+            ),
+          }
+        }
+        const event: ScheduleEvent = {
+          id: uuid(),
+          title: partial.title,
+          description: partial.description ?? '',
+          date: partial.date,
+          startTime: partial.startTime ?? '10:00',
+          endTime: partial.endTime ?? '11:00',
+          color: partial.color ?? '#2F6F5E',
+          taskId: partial.taskId ?? null,
+        }
+        return { ...prev, events: [...prev.events, event] }
+      })
+    },
+    [],
+  )
+
+  const deleteEvent = useCallback((id: string) => {
+    setState((prev) => ({
+      ...prev,
+      events: prev.events.filter((e) => e.id !== id),
+    }))
+  }, [])
+
+  const upsertPrompt = useCallback(
+    (partial: Partial<PromptTemplate> & { title: string; body: string }) => {
+      setState((prev) => {
+        const now = new Date().toISOString()
+        const vars =
+          partial.variables ??
+          Array.from(partial.body.matchAll(/\{\{([^}]+)\}\}/g)).map((m) =>
+            m[1].trim(),
+          )
+
+        if (partial.id) {
+          return {
+            ...prev,
+            prompts: prev.prompts.map((p) =>
+              p.id === partial.id
+                ? { ...p, ...partial, variables: vars, updatedAt: now }
+                : p,
+            ),
+          }
+        }
+        const prompt: PromptTemplate = {
+          id: uuid(),
+          title: partial.title,
+          category: partial.category ?? '一般',
+          body: partial.body,
+          variables: vars,
+          favorite: partial.favorite ?? false,
+          updatedAt: now,
+        }
+        return { ...prev, prompts: [prompt, ...prev.prompts] }
+      })
+    },
+    [],
+  )
+
+  const deletePrompt = useCallback((id: string) => {
+    setState((prev) => ({
+      ...prev,
+      prompts: prev.prompts.filter((p) => p.id !== id),
+    }))
+  }, [])
+
+  const toggleFavorite = useCallback((id: string) => {
+    setState((prev) => ({
+      ...prev,
+      prompts: prev.prompts.map((p) =>
+        p.id === id ? { ...p, favorite: !p.favorite } : p,
+      ),
+    }))
+  }, [])
+
+  return {
+    ...state,
+    upsertTask,
+    deleteTask,
+    moveTask,
+    upsertEvent,
+    deleteEvent,
+    upsertPrompt,
+    deletePrompt,
+    toggleFavorite,
+    resetDemo,
+  }
+}
