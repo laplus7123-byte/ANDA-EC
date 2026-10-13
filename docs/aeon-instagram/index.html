@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>イオン北海道 Instagram 改善提案｜株式会社 La plus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #fbfbf8;
+    --ink: #12192e;
+    --muted: #767884;
+    --brand: #315ae8;
+    --violet: #eff0f5;
+    --line: #d8d9d6;
+    --danger: #c23b3b;
+    --ok: #2f7a4a;
+    --pop: linear-gradient(90deg, #9e73b4, #6b5ce7, #1a6aff);
+    --sans: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+    --display: "Unbounded", Arial, sans-serif;
+    --heading: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: #e8e8e4; }
+  body {
+    font-family: var(--heading);
+    color: var(--ink);
+    background: #e8e8e4;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: #fbfbf8ee;
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(12px);
+  }
+  .toolbar .brand {
+    font-family: var(--display);
+    font-size: 14px;
+    letter-spacing: -0.04em;
+  }
+  .toolbar .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .toolbar button, .toolbar a.btn {
+    appearance: none;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    color: var(--ink);
+    font: 500 11px/1 var(--display);
+    letter-spacing: 0.04em;
+    padding: 10px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .toolbar button.primary, .toolbar a.btn.primary {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+  .toolbar .hint {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .deck {
+    width: min(1120px, calc(100% - 32px));
+    margin: 24px auto 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .slide {
+    width: 100%;
+    aspect-ratio: 297 / 210;
+    background: var(--paper);
+    border: 1px solid #d0d1cc;
+    border-radius: 4px;
+    padding: 36px 42px 28px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px -22px #12192e55;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .slide-foot {
+    position: absolute;
+    left: 42px;
+    right: 42px;
+    bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--display);
+    font-size: 9px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .slide-foot .mark {
+    background: var(--pop);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 500;
+  }
+
+  .eyebrow {
+    font-family: var(--display);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow:before {
+    content: "";
+    width: 22px;
+    height: 2px;
+    background: var(--pop);
+  }
+
+  h1 {
+    font-family: var(--heading);
+    font-weight: 500;
+    font-size: clamp(28px, 3.4vw, 40px);
+    letter-spacing: 0.06em;
+    line-height: 1.55;
+    margin-top: 14px;
+  }
+  h2 {
+    font-family: var(--heading);
+    font-weight: 500;
+    font-size: clamp(22px, 2.4vw, 30px);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    margin: 8px 0 16px;
+  }
+  h3 {
+    font-family: var(--heading);
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  p, li {
+    font-size: 13px;
+    line-height: 1.9;
+    letter-spacing: 0.03em;
+  }
+  .muted { color: var(--muted); }
+  .small { font-size: 11px; line-height: 1.7; }
+
+  .cover {
+    background:
+      radial-gradient(ellipse at 12% 85%, #f8b3a055, transparent 55%),
+      radial-gradient(ellipse at 78% 18%, #1239a833, transparent 70%),
+      #6f8fc8;
+    color: #fff;
+    border: 0;
+  }
+  .cover .eyebrow, .cover .slide-foot, .cover .muted { color: #ffffffcc; }
+  .cover .eyebrow:before { background: #fff; }
+  .cover h1 { color: #fff; margin-top: 28px; font-size: clamp(32px, 4vw, 48px); }
+  .cover .lead {
+    margin-top: 18px;
+    max-width: 620px;
+    font-size: 14px;
+    line-height: 2.1;
+    letter-spacing: 0.08em;
+  }
+  .cover .sig {
+    position: absolute;
+    left: 42px;
+    bottom: 58px;
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(28px, 4vw, 54px);
+    letter-spacing: -0.05em;
+    line-height: 1.2;
+  }
+  .cover .meta {
+    position: absolute;
+    right: 42px;
+    bottom: 58px;
+    text-align: right;
+    font-size: 12px;
+    line-height: 2;
+    letter-spacing: 0.06em;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 28px;
+    height: calc(100% - 86px);
+  }
+  .grid-2b {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    height: calc(100% - 86px);
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .stat {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 16px 16px 14px;
+  }
+  .stat .n {
+    font-family: var(--display);
+    font-size: 28px;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+  }
+  .stat .n.danger { color: var(--danger); }
+  .stat .n.ok { color: var(--ok); }
+  .stat .n.brand { color: var(--brand); }
+  .stat .l {
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .shot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: #fff;
+  }
+  .shot-wrap {
+    position: relative;
+    height: 100%;
+    min-height: 0;
+  }
+  .shot-caption {
+    margin-top: 8px;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    background: #12192eee;
+    color: #fff;
+    font: 500 10px/1 var(--display);
+    letter-spacing: 0.06em;
+    padding: 7px 10px;
+    border-radius: 3px;
+  }
+  .badge.warn { background: #c23b3bee; }
+  .badge.ok { background: #2f7a4aee; }
+
+  .callout {
+    border-left: 3px solid transparent;
+    border-image: var(--pop) 1;
+    background: var(--violet);
+    padding: 14px 16px;
+    border-radius: 0 4px 4px 0;
+  }
+  .callout.warn {
+    border-image: none;
+    border-left-color: var(--danger);
+    background: #f7ecec;
+  }
+  .callout.ok {
+    border-image: none;
+    border-left-color: var(--ok);
+    background: #ebf4ee;
+  }
+
+  ul.clean { list-style: none; }
+  ul.clean li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 6px;
+  }
+  ul.clean li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.75em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--pop);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+  th, td {
+    border-bottom: 1px solid var(--line);
+    padding: 9px 8px;
+    text-align: left;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  th {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  tr.bad td:first-child { color: var(--danger); font-weight: 500; }
+  tr.good td:first-child { color: var(--ok); font-weight: 500; }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .pillar {
+    border: 1px solid var(--line);
+    background: #fff;
+    border-radius: 4px;
+    padding: 14px 12px;
+    min-height: 150px;
+  }
+  .pillar .num {
+    font-family: var(--display);
+    font-size: 11px;
+    color: var(--brand);
+    letter-spacing: 0.04em;
+  }
+  .pillar h3 { font-size: 14px; margin: 8px 0; }
+  .pillar p { font-size: 11px; line-height: 1.7; color: #4a5160; }
+
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    height: calc(100% - 92px);
+  }
+  .compare .side {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .compare .side .shot-wrap { flex: 1; }
+
+  .agenda {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 28px;
+    margin-top: 18px;
+  }
+  .agenda .item {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .agenda .no {
+    font-family: var(--display);
+    font-size: 18px;
+    letter-spacing: -0.04em;
+    background: var(--pop);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  @media print {
+    html, body { background: #fff !important; }
+    .toolbar { display: none !important; }
+    .deck {
+      width: auto !important;
+      margin: 0 !important;
+      gap: 0 !important;
+      display: block !important;
+    }
+    .slide {
+      width: 297mm !important;
+      height: 210mm !important;
+      max-height: 210mm !important;
+      aspect-ratio: auto !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+      padding: 18mm 16mm 14mm !important;
+      page-break-after: always !important;
+      break-after: page !important;
+      page-break-inside: avoid !important;
+      overflow: hidden !important;
+    }
+    .slide:last-child {
+      page-break-after: auto !important;
+      break-after: auto !important;
+    }
+    .shot-wrap { overflow: hidden; }
+    @page { size: A4 landscape; margin: 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <div>
+      <div class="brand">La plus+ ／ Instagram Proposal</div>
+      <div class="hint">パソコンで開いたあと「PDFで保存」を押すと、同じ見た目のPDFになります</div>
+    </div>
+    <div class="actions">
+      <a class="btn" href="./イオン北海道_Instagram改善提案_Laplus.pdf" download>PDFをダウンロード</a>
+      <button class="primary" onclick="window.print()">PDFで保存 / 印刷</button>
+    </div>
+  </div>
+
+  <div class="deck">
+    <!-- 01 COVER -->
+    <section class="slide cover">
+      <div class="eyebrow">MARKETING ／ SNS AUDIT</div>
+      <h1>イオン北海道<br />公式Instagram 改善提案</h1>
+      <p class="lead">
+        @aeonhokkaido_of を、チラシ掲示板から<br />
+        「保存される北海道の暮らしメディア」へ。
+      </p>
+      <div class="sig">Ideas into<br />reality.</div>
+      <div class="meta">
+        株式会社 La plus<br />
+        2026.10.13<br />
+        Confidential
+      </div>
+      <div class="slide-foot">
+        <span class="mark">La plus+</span>
+        <span>01 / 12</span>
+      </div>
+    </section>
+
+    <!-- 02 AGENDA -->
+    <section class="slide">
+      <div class="eyebrow">AGENDA</div>
+      <h2>今日お渡しする内容</h2>
+      <div class="agenda">
+        <div class="item"><div class="no">01</div><div><h3>現状の数字</h3><p class="muted small">フォロワー・投稿数・姉妹アカウント</p></div></div>
+        <div class="item"><div class="no">02</div><div><h3>スクショで見る課題</h3><p class="muted small">プロフィール／グリッド／チラシ転載</p></div></div>
+        <div class="item"><div class="no">03</div><div><h3>全国公式との差</h3><p class="muted small">@aeon_japan との見え方比較</p></div></div>
+        <div class="item"><div class="no">04</div><div><h3>アカウント設計</h3><p class="muted small">6アカウント分散とリンク切れ</p></div></div>
+        <div class="item"><div class="no">05</div><div><h3>最初の2週間</h3><p class="muted small">すぐ着手できる6手</p></div></div>
+        <div class="item"><div class="no">06</div><div><h3>週の投稿の柱</h3><p class="muted small">Instagram向けの型に再編成</p></div></div>
+      </div>
+      <div class="slide-foot"><span class="mark">La plus+</span><span>02 / 12</span></div>
+    </section>
+
+    <!-- 03 STATUS -->
+    <section class="slide">
+      <div class="eyebrow">CURRENT STATUS</div>
+      <h2>いまの数字（公開情報・2026.10.13）</h2>
+      <div class="grid-4">
+        <div class="stat"><div class="n brand">14K</div><div class="l">公式IGフォロワー<br />@aeonhokkaido_of</div></div>
+        <div class="stat"><div class="n">413</div><div class="l">投稿数<br />約0.9年換算でも蓄積あり</div></div>
+        <div class="stat"><div class="n danger">26.8K</div><div class="l">公式Xフォロワー<br />@aeonhokkaidoof（参考）</div></div>
+        <div class="stat"><div class="n danger">空白</div><div class="l">プロフィール文・導線リンク<br />埋め込み表示では未確認</div></div>
+      </div>
+      <div style="height:14px"></div>
+      <div class="callout warn">
+        <h3>いちばん大きな違和感</h3>
+        <p>小売の公式アカウントでは、通常は Instagram のほうが X よりフォロワーが多くなりやすい。北海道は X 約2.7万に対し IG 約1.4万。同じ「商品・セール」を出しても、Instagram側の“見られる設計”が追いついていない可能性が高い。</p>
+      </div>
+      <p class="shot-caption" style="margin-top:12px">出典: Instagram embed 公開表示 / 公式ソーシャルメディアページ / 並行調査のX公開カウント。管理画面のリーチ・保存数は未取得。</p>
+      <div class="slide-foot"><span class="mark">La plus+</span><span>03 / 12</span></div>
+    </section>
+
+    <!-- 04 SCREENSHOT PROFILE -->
+    <section class="slide">
+      <div class="eyebrow">SCREENSHOT ／ PROFILE</div>
+      <h2>公式アカウントの見え方</h2>
+      <div class="grid-2">
+        <div class="shot-wrap">
+          <span class="badge">@aeonhokkaido_of</span>
+          <img class="shot" src="assets/10-main-embed.png" alt="イオン北海道公式Instagram埋め込みスクショ" />
+        </div>
+        <div>
+          <div class="callout">
+            <h3>スクショから読み取れること</h3>
+            <ul class="clean">
+              <li>表示名は「【公式】イオン北海道」で信頼感は取れている</li>
+              <li>直近グリッドはチラシ系4・動画系2の比率</li>
+              <li>色・文字量・余白が投稿ごとにバラバラ</li>
+              <li>スマホでは価格・条件が読めない密度</li>
+              <li>プロフィール下の説明・リンクが弱い</li>
+            </ul>
+          </div>
+          <div style="height:12px"></div>
+          <div class="callout warn">
+            <h3>改善の芯</h3>
+            <p>「紙チラシを正方形に貼る」運用をやめ、<strong>1投稿1メッセージ</strong>のモバイル専用デザインに切り替える。</p>
+          </div>
+          <p class="shot-caption">取得: Instagram embed（ログイン壁を回避した公開表示）／2026.10.13</p>
+        </div>
+      </div>
+      <div class="slide-foot"><span class="mark">La plus+</span><span>04 / 12</span></div>
+    </section>
+
+    <!-- 05 ISSUE PROFILE -->
+    <section class="slide">
+      <div class="eyebrow">ISSUE 01</div>
+      <h2>プロフィールが「入口」になっていない</h2>
+      <div class="grid-2">
+        <div class="shot-wrap">
+          <span class="badge warn">BIO / CTA</span>
+          <img class="shot" src="assets/crop-main-header.png" alt="プロフィールヘッダー" style="object-fit:contain;background:#fff" />
+        </div>
+        <div>
+          <h3>いま起きていること</h3>
+          <ul class="clean">
+            <li>フォロー判断に必要な「誰向け・何が得か」が短い</li>
+            <li>iAEON・店舗検索・eショップへの導線がプロフィールに無い</li>
+            <li>ニュースリリースではIGを案内しているのに、着地が弱い</li>
+          </ul>
+          <div style="height:12px"></div>
+          <div class="callout ok">
+            <h3>差し替え文案（例）</h3>
+            <p class="small">北海道のくらしを、楽しく・おトクに。<br />今日の得／旬の食材／わおんの裏側を毎日。<br />店舗の詳しいご案内は公式サイトへ ▼</p>
+          </div>
+          <p class="shot-caption" style="margin-top:10px">右記は提案文。公開前に広報・法務の表現ルールへ合わせて整える。</p>
+        </div>
+      </div>
+      <div class="slide-foot"><span class="mark">La plus+</span><span>05 / 12</span></div>
+    </section>
+
+    <!-- 06 ISSUE GRID -->
+    <section class="slide">
+      <div class="eyebrow">ISSUE 02</div>
+      <h2>グリッドが「読めないチラシ棚」になっている</h2>
+      <div class="compare">
+        <div class="side">
+          <div class="shot-wrap">
+            <span class="badge warn">DENSE FLYER</span>
+            <img class="shot" src="assets/crop-flyer-dense.png" alt="情報過多なチラシ投稿" />
+          </div>
+          <p class="shot-caption">iAEONクーポン／お得祭PICK UP など。文字が小さく、保存されにくい。</p>
+        </div>
+        <div class="side">
+          <div class="shot-wrap">
+            <span class="badge ok">REEL WORKS</span>
+            <img class="shot" src="assets/crop-reel-soft.png" alt="柔らかい生地のリール" />
+          </div>
+          <p class="shot-caption">「めちゃくちゃ柔らかい」は、親指を止める一言と質感がある。この型を主軸へ。</p>
+        </div>
+      </div>
+      <div class="slide-foot"><span class="mark">La plus+</span><span>06 / 12</span></div>
+    </section>
+
+    <!-- 07 COMPARE JAPAN -->
+    <section class="slide">
+      <div class="eyebrow">BENCHMARK</div>
+      <h2>全国公式 @aeon_japan との差</h2>
+      <div class="compare">
+        <div class="side">
+          <h3>北海道 @aeonhokkaido_of</h3>
+          <div class="shot-wrap">
+            <span class="badge warn">14K ／ チラシ中心</span>
+            <img class="shot" src="assets/crop-main-grid.png" alt="北海道グリッド" />
+          </div>
+        </div>
+        <div class="side">
+          <h3>全国 @aeon_japan</h3>
+          <div class="shot-wrap">
+            <span class="badge ok">246K ／ レシピ中心</span>
+            <img class="shot" src="assets/crop-japan-grid.png" alt="全国グリッド" />
+          </div>
+        </div>
+      </div>
+      <div class="slide-foot"><span class="mark">La plus+</span><span>07 / 12</span></div>
+    </section>
+
+    <!-- 08 COMPARE NOTES -->
+    <section class="slide">
+      <div class="eyebrow">BENCHMARK ／ READING</div>
+      <h2>差の本質は「予算」ではなく「型」</h2>
+      <table>
+        <thead>
+          <tr><th>観点</th><th>北海道</th><th>全国公式</th><th>北海道で取る手</th></tr>
+        </thead>
+        <tbody>
+          <tr class="bad">
+            <td>1枚目の情報量</td>
+            <td>価格・条件・商品を一括</td>
+            <td>料理名＋ひとこと</td>
+            <td>1投稿1メッセージ。条件は2枚目以降</td>
+          </tr>
+          <tr class="bad">
+            <td>グリッドの統一</td>
+            <td>色も余白もバラバラ</td>
+            <td>食写真＋大きな文字で揃う</td>
+            <td>北海道は「売場色＋白余白」の型を固定</td>
+          </tr>
+          <tr class="good">
+            <td>強みの出し方</td>
+            <td>ファイターズ・衣料の手触り</td>
+            <td>レシピ・季節</td>
+            <td>道産旬・店舗・地域応援を主役に</td>
+          </tr>
+          <tr>
+            <td>役割分担</td>
+            <td>Xと同じ「得情報」を重ねやすい</td>
+            <td>レシピメディア化</td>
+            <td>X＝速報／IG＝保存される暮らし</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="height:14px"></div>
+      <div class="callout">
+        <p>全国公式のコピーではなく、<strong>北海道でしか出せない旬・店・応援</strong>を、全国と同じ“読みやすさの型”に乗せる。</p>
+      </div>
+      <div class="slide-foot"><span class="mark">La plus+</span><span>08 / 12</span></div>
+    </section>
+
+    <!-- 09 ACCOUNT ARCHITECTURE -->
+    <section class="slide">
+      <div class="eyebrow">ISSUE 03</div>
+      <h2>アカウントが分かれすぎている</h2>
+      <div class="grid-2">
+        <div>
+          <table>
+            <thead><tr><th>アカウント</th><th>役割</th><th>規模</th></tr></thead>
+            <tbody>
+              <tr><td>@aeonhokkaido_of</td><td>商品・セール</td><td>14K / 413</td></tr>
+              <tr><td>@fghibihana</td><td>Flower&amp;Garden</td><td>1.3K / 797</td></tr>
+              <tr><td>@netrakutaku</td><td>ネット楽宅便</td><td>152 / 39</td></tr>
+              <tr class="bad"><td>@ahomuni</td><td>eショップ（公式記載）</td><td>プロフィール到達不可</td></tr>
+              <tr><td>@aeonhokkaidoathomestoreca</td><td>地域連携</td><td>274 / 267</td></tr>
+              <tr><td>@aeonhokkaidokankyou</td><td>環境・社会貢献</td><td>340 / 22</td></tr>
+            </tbody>
+          </table>
+          <p class="shot-caption" style="margin-top:8px">公式サイト「ソーシャルメディアについて」掲載アカウント。2026.10.13確認。</p>
+        </div>
+        <div>
+          <div class="shot-wrap" style="height:58%">
+            <span class="badge">OFFICIAL LIST</span>
+            <img class="shot" src="assets/crop-social-ig-list.png" alt="公式SNS一覧" />
+          </div>
+          <div style="height:10px"></div>
+          <div class="callout warn">
+            <h3>優先対応</h3>
+            <p>@ahomuni は公式ページに載ったまま到達できない。誘導事故になるので、復旧か一覧からの削除を先に。</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-foot"><span class="mark">La plus+</span><span>09 / 12</span></div>
+    </section>
+
+    <!-- 10 FIRST 2 WEEKS -->
+    <section class="slide">
+      <div class="eyebrow">FIRST 2 WEEKS</div>
+      <h2>最初の2週間でやること</h2>
+      <table>
+        <thead><tr><th>順</th><th>一手</th><th>見る数字</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>プロフィール文とリンクを更新。ハイライトを「今日の得／旬／店／FAQ」の4つに整理。</td>
+            <td>プロフィール完成度</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>チラシ全面転載を停止。得情報は「金額・期限・対象」を大きくした1メッセージ画像へ。</td>
+            <td>保存数（いいねより優先）</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>リールを週3本。衣料の手触り、売場15秒、道産食材の使い方。</td>
+            <td>リーチ・再生・フォロー増分</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>キャプション末尾に質問を1つ。当日10件まで返す（苦情・在庫断定は窓口へ）。</td>
+            <td>コメント数</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>姉妹アカウントへの相互誘導をプロフィールとストーリーに固定。リンク切れを解消。</td>
+            <td>プロフィールタップ</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Xで当たった型（体験・欲しい商品）だけIG用に再編集。同じ原稿のコピペはしない。</td>
+            <td>型別の保存・シェア</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="slide-foot"><span class="mark">La plus+</span><span>10 / 12</span></div>
+    </section>
+
+    <!-- 11 PILLARS -->
+    <section class="slide">
+      <div class="eyebrow">CONTENT SYSTEM</div>
+      <h2>週の5本柱（Instagram版）</h2>
+      <div class="pillars">
+        <div class="pillar"><div class="num">01</div><h3>今日の得</h3><p>週4。金額・期限・対象を大きく。詳細はカルーセル2枚目。</p></div>
+        <div class="pillar"><div class="num">02</div><h3>北海道の旬</h3><p>週2。道産の品を「今夜の一皿」で。全国公式のレシピ型をローカル化。</p></div>
+        <div class="pillar"><div class="num">03</div><h3>手触りリール</h3><p>週3。衣料・食品・売場。最初の1秒で名詞を出す。</p></div>
+        <div class="pillar"><div class="num">04</div><h3>店と人</h3><p>週2。1店舗または1工場。顔出し可否は現場ルールに従う。</p></div>
+        <div class="pillar"><div class="num">05</div><h3>地域の応援</h3><p>週1。ファイターズ等。懸賞は月2本まで、体験賞を優先。</p></div>
+      </div>
+      <div style="height:16px"></div>
+      <div class="callout">
+        <p>Xは速報と会話、Instagramは保存と発見。同じクーポン原稿を両媒体に貼らない。媒体が違うなら、切り口も変える。</p>
+      </div>
+      <div class="slide-foot"><span class="mark">La plus+</span><span>11 / 12</span></div>
+    </section>
+
+    <!-- 12 CLOSE -->
+    <section class="slide">
+      <div class="eyebrow">NEXT</div>
+      <h2>次に進めること</h2>
+      <div class="grid-3">
+        <div class="stat">
+          <div class="n brand" style="font-size:20px">Design</div>
+          <div class="l">投稿テンプレ3種<br />（得／旬／リールカバー）</div>
+        </div>
+        <div class="stat">
+          <div class="n brand" style="font-size:20px">Ops</div>
+          <div class="l">2週間の投稿カレンダー<br />担当・素材元・承認</div>
+        </div>
+        <div class="stat">
+          <div class="n brand" style="font-size:20px">Measure</div>
+          <div class="l">保存・リーチ・プロフィールタップ<br />週1の型別メモ</div>
+        </div>
+      </div>
+      <div style="height:18px"></div>
+      <div class="grid-2b" style="height:auto">
+        <div class="callout ok">
+          <h3>この資料の前提</h3>
+          <p class="small">Instagramはログイン壁のため、公開embedと公式サイト・ニュースから確認。いいね等の投稿別反応は管理画面側の数値で最終確認が必要です。</p>
+        </div>
+        <div class="callout">
+          <h3>ご相談ください</h3>
+          <p class="small">テンプレ制作、運用代行、Xとの役割整理まで一気通貫で伴走します。<br />株式会社 La plus ／ laplusgroup.com</p>
+        </div>
+      </div>
+      <div style="position:absolute;left:42px;bottom:52px;font-family:var(--display);font-size:28px;letter-spacing:-0.05em;font-weight:300">
+        あなたの未来をプラスに。
+      </div>
+      <div class="slide-foot"><span class="mark">La plus+</span><span>12 / 12</span></div>
+    </section>
+  </div>
+
+  <script>
+    // Prefer PDF download path when file exists; print remains available.
+  </script>
+</body>
+</html>
